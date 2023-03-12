@@ -1,6 +1,8 @@
 CC        := gcc
 LD        := gcc
 
+CFLAGS    := -Wall -g
+
 BIN_FILE  := bin/program.exe
 MODULES   := main application
 
@@ -15,7 +17,7 @@ vpath %.c $(SRC_DIR)
 
 define make-goal
 $1/%.o: %.c
-	$(CC) $(INCLUDES) -c $$< -o $$@
+	$(CC) $(CFLAGS) $(INCLUDES) -c $$< -o $$@
 endef
 
 .PHONY: all checkdirs clean
@@ -23,7 +25,7 @@ endef
 all: checkdirs $(BIN_FILE)
  
 $(BIN_FILE): $(OBJ)
-	$(LD) $^ -o $@
+	$(LD) $(CFLAGS) $^ -o $@
 
 
 checkdirs: $(BUILD_DIR)
